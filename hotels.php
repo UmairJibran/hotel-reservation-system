@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a href="./"><button class="go-home">Go Home</button></a>
     <div class="container container-fluid">
         <div class="jumbotron">
             <h2 class="center">Best Hotesl in <?php echo $city;?></h2>
