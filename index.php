@@ -33,6 +33,15 @@
             </div>
             <input type="submit" value="Show Hotels" name="show" class="btn btn-primary">
         </form>
+        <br><br>
+        <form method='POST'>
+            <label>Enter your CNIC/Passport to view your Reservations</label>
+            <input type="number" class='form-control' name="cnic" required><br>
+            <input type="submit" name='checkres' value="View" class='btn btn-outline-danger right'>
+        </form>
+        <?php
+            if(isset($_POST['checkres'])){header("location:./reservations.php?id=".$_POST['cnic']);}
+        ?>
     </div>
 </body>
 </html>
