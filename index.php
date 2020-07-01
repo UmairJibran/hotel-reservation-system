@@ -1,3 +1,4 @@
+<?php require_once('./server/connection.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
