@@ -73,7 +73,7 @@
             <div class="input-group">
                 <label for="id">Enter Your ID <strong>WITHOUT</strong> dashes: </label>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="number" class='form-control' name="id_num" id="id">
+                <input type="number" class='form-control' name="id_num" require id="id">
                 &nbsp;&nbsp;&nbsp;
                 <input name='reserve' type="submit" value="Reserve A Room" class="button low-padding">
             </div>
