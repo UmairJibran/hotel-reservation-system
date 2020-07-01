@@ -12,6 +12,7 @@
     <div class="container container-fluid">
         <div class="jumbotron">
             <h1 class="center">Hotel Management System</h1>
+            <small class='right'>Admin? <a href="./admin/login.php">Login</a></small>
         </div>
         <form method="POST">
             <div class="form-group">
