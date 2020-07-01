@@ -95,19 +95,30 @@
 </html>
 
 <?php
-if(isset($_POST['book'])){
-    $first_name = $_POST['fname'];
-    $last_name = $_POST['lname'];
-    $email = $_POST['email'];
-    $contact = $_POST['contact'];
-    $credit = $_POST['ccard'];
-    if($exists)
-        $sql = "UPDATE `tbl-customer` SET `customer_first_name` = '${first_name}',`customer_last_name` = '${last_name}',`customer_email` = '${email}',`customer_contact` = '${contact}',`customer_card`='${customer_card}' WHERE `tbl-customer`.`customer_id` = ${customer_id};";
-    else
-        $sql = "INSERT INTO `tbl-customer` (`customer_id`, `customer_first_name`, `customer_last_name`, `customer_identity_number`, `customer_contact`, `customer_type`, `customer_email`, `customer_card`) VALUES (NULL, '${first_name}', '${last_name}', '${customer_cp_id}', '${contact}', \'Normal\', '${email}', '${credit}')";
-    if($conn->query($sql)===true){
-        
+    $roomType;
+    $start;
+    $end; 
+    $cost;
+    if(isset($_POST['book'])){
+        $first_name = $_POST['fname'];
+        $last_name = $_POST['lname'];
+        $email = $_POST['email'];
+        $contact = $_POST['contact'];
+        $credit = $_POST['ccard'];
+        if($exists){
+            $sql = "UPDATE `tbl-customer` SET `customer_first_name` = '${first_name}',`customer_last_name` = '${last_name}',`customer_email` = '${email}',`customer_contact` = '${contact}',`customer_card`='${customer_card}' WHERE `tbl-customer`.`customer_id` = ${customer_id};";
+            if($conn->query($sql)===true){addReservation();}
+        }
+        else{
+            echo 'ss';
+            $sql = "INSERT INTO `tbl-customer` (`customer_id`, `customer_first_name`, `customer_last_name`, `customer_identity_number`, `customer_contact`, `customer_type`, `customer_email`, `customer_card`) VALUES (NULL, '${first_name}', '${last_name}', '${customer_cp_id}', '${contact}', \'Normal\', '${email}', '${credit}')";
+            if($conn->query($sql)===true) {$customer_id = $conn->insert_id;addReservation();}
+        }
+    }
+    function  addReservation(){
+        $sql = "INSERT INTO `tbl-reservations` (`res_id`, `hotel_id`, `customer_id`, `room_type`, `start_data`, `end_date`, `total_cost`)
+        VALUES (NULL, '${hotel_id}', '${customer_id}', '${roomType}', '${start}', '${end}', '${cost}')";
         header('location:./');
     }
-}
 ?>
+
