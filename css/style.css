@@ -11,13 +11,13 @@
     border: none;
     cursor: pointer;
     opacity: 0.8;
+    width: 280px;
 }
 
 .bottom {
     position: fixed;
     bottom: 23px;
     right: 28px;
-    width: 280px;
 }
 
 .left {
