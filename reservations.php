@@ -43,11 +43,16 @@
                                 $start = $resData['start_data'];
                                 $end = $resData['end_date'];
                                 $cost = $resData['total_cost'];
-                                $sql1 = "SELECT * FROM";
+                                $hotelID = $resData['hotel_id'];
+                                $sql1 = "SELECT * FROM `tbl-hotel-info` WHERE `hotel_ID` = $hotelID";
+                                $result1 = $conn->query($sql1);
+                                $hotData = $result1->fetch_assoc();
+                                $hotelName = $hotData['hotel_NAME'];
+                                $hotelCity = $hotData['hotel_CITY'];
                                 echo "<tr>
                                     <td>$counter</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>$hotelName</td>
+                                    <td>$hotelCity</td>
                                     <td>$start</td>
                                     <td>$end</td>
                                     <td>$cost</td>
