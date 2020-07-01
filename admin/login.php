@@ -38,7 +38,7 @@
         $rows = $result->num_rows;
         if($rows == 1){
             $_SESSION['id'] = $id;
-            header('location:./dashboard.php');
+            header('location:./verify.php');
         }
     }
 ?>
