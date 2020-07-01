@@ -16,3 +16,11 @@
     right: 28px;
     width: 280px;
 }
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
