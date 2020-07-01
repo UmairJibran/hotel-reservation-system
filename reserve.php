@@ -9,6 +9,7 @@
     $credit = '';
     $customer_id = 0;
     $exists = false;
+    $status = 'Normal';
     $sql = "SELECT * FROM `tbl-customer` WHERE `customer_identity_number` = '${customer_cp_id}'";
     $result = $conn->query($sql);
     $rows = $result->num_rows;
@@ -21,6 +22,7 @@
             $email = $userData['customer_email'];
             $contact = $userData['customer_contact'];
             $credit = $userData['customer_card'];
+            $status = $userData['customer_type'];
         }
     }
 ?>
@@ -105,19 +107,20 @@
         $email = $_POST['email'];
         $contact = $_POST['contact'];
         $credit = $_POST['ccard'];
-        if($exists){
-            $sql = "UPDATE `tbl-customer` SET `customer_first_name` = '${first_name}',`customer_last_name` = '${last_name}',`customer_email` = '${email}',`customer_contact` = '${contact}',`customer_card`='${customer_card}' WHERE `tbl-customer`.`customer_id` = ${customer_id};";
-            if($conn->query($sql)===true){addReservation();}
+        if($exists == true){
+            $sql = "UPDATE `tbl-customer` SET `customer_first_name` = '${first_name}',`customer_last_name` = '${last_name}',`customer_email` = '${email}',`customer_contact` = '${contact}',`customer_card`='${credit}' WHERE `tbl-customer`.`customer_id` = ${customer_id};";
+            $conn->query($sql);
         }
         else{
-            echo 'ss';
-            $sql = "INSERT INTO `tbl-customer` (`customer_id`, `customer_first_name`, `customer_last_name`, `customer_identity_number`, `customer_contact`, `customer_type`, `customer_email`, `customer_card`) VALUES (NULL, '${first_name}', '${last_name}', '${customer_cp_id}', '${contact}', \'Normal\', '${email}', '${credit}')";
-            if($conn->query($sql)===true) {$customer_id = $conn->insert_id;addReservation();}
+            $sql = "INSERT INTO `hotel-management-system`.`tbl-customer` (`customer_id`, `customer_first_name`, `customer_last_name`, `customer_identity_number`, `customer_contact`, `customer_type`, `customer_email`, `customer_card`) VALUES (NULL, '${first_name}', '${last_name}', '${customer_cp_id}', '${contact}', \'Normal\', '${email}', '${credit}')";
+            if($conn->query($sql)===true) $customer_id = $conn->insert_id;
         }
-    }
-    function  addReservation(){
+        $days = $end - $start;
+        if($status == 'Normal')$cost = $days * 50;
+        else $cost = $days * 40;
         $sql = "INSERT INTO `tbl-reservations` (`res_id`, `hotel_id`, `customer_id`, `room_type`, `start_data`, `end_date`, `total_cost`)
         VALUES (NULL, '${hotel_id}', '${customer_id}', '${roomType}', '${start}', '${end}', '${cost}')";
+        $conn->query($sql);
         header('location:./');
     }
 ?>
