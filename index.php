@@ -15,7 +15,7 @@
         </div>
         <form method="POST">
             <div class="form-group">
-                <label for="city">Select a City</label>
+                <label for="city" class='sr-only'>Select a City</label>
                 <select name="city" id="city" class="form-control form-control-lg" required>
                     <option selected disabled value="">Select a City</option>
                     <?php
