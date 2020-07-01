@@ -3,7 +3,7 @@
     margin: auto;
 }
 
-.go-home {
+.button {
     background-color: rgb(233, 173, 228);
     color: rgb(0, 0, 0);
     font-weight: bold;
@@ -11,6 +11,9 @@
     border: none;
     cursor: pointer;
     opacity: 0.8;
+}
+
+.bottom {
     position: fixed;
     bottom: 23px;
     right: 28px;

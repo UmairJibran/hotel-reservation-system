@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <a href="./"><button class="go-home">Go Home</button></a>
+    <a href="./"><button class="button bottom">Go Home</button></a>
     <div class="container container-fluid">
         <div class="jumbotron">
             <h3 class="center">Welcome to <?php echo $name . ", " . $city ?></h3>
