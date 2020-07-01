@@ -106,6 +106,7 @@ if(isset($_POST['book'])){
     else
         $sql = "INSERT INTO `tbl-customer` (`customer_id`, `customer_first_name`, `customer_last_name`, `customer_identity_number`, `customer_contact`, `customer_type`, `customer_email`, `customer_card`) VALUES (NULL, '${first_name}', '${last_name}', '${customer_cp_id}', '${contact}', \'Normal\', '${email}', '${credit}')";
     if($conn->query($sql)===true){
+        
         header('location:./');
     }
 }
