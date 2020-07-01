@@ -97,27 +97,81 @@
 </html>
 
 <?php
-    $roomType;
-    $start;
-    $end; 
-    $cost;
     if(isset($_POST['book'])){
+        $start = $_POST['start'];
+        $end = $_POST['end']; 
+        $cost = 0;
         $first_name = $_POST['fname'];
         $last_name = $_POST['lname'];
         $email = $_POST['email'];
         $contact = $_POST['contact'];
         $credit = $_POST['ccard'];
+        $roomType = $_POST['room'];
         if($exists == true){
             $sql = "UPDATE `tbl-customer` SET `customer_first_name` = '${first_name}',`customer_last_name` = '${last_name}',`customer_email` = '${email}',`customer_contact` = '${contact}',`customer_card`='${credit}' WHERE `tbl-customer`.`customer_id` = ${customer_id};";
             $conn->query($sql);
         }
         else{
-            $sql = "INSERT INTO `hotel-management-system`.`tbl-customer` (`customer_id`, `customer_first_name`, `customer_last_name`, `customer_identity_number`, `customer_contact`, `customer_type`, `customer_email`, `customer_card`) VALUES (NULL, '${first_name}', '${last_name}', '${customer_cp_id}', '${contact}', \'Normal\', '${email}', '${credit}')";
+            $sql = "INSERT INTO `tbl-customer` (`customer_id`, `customer_first_name`, `customer_last_name`, `customer_identity_number`, `customer_contact`, `customer_type`, `customer_email`, `customer_card`) VALUES (NULL, '${first_name}', '${last_name}', '${customer_cp_id}', '${contact}', 'Normal', '${email}', '${credit}');";
             if($conn->query($sql)===true) $customer_id = $conn->insert_id;
+            echo $customer_id;
         }
-        $days = $end - $start;
-        if($status == 'Normal')$cost = $days * 50;
-        else $cost = $days * 40;
+        $days = 5;
+        $pdcn = 0;
+        $pdcp = 0;
+        switch($roomType){
+            case 's':{
+                $sql = "SELECT * FROM `tbl-hotel-info` WHERE `tbl-hotel-info`.`hotel_ID` = ${hotel_id};";
+                $result = $conn->query($sql);
+                $data = $result->fetch_assoc();
+                $curr = $data['hotel_BOOKED_SINGLE'];
+                $curr = $curr+1;
+                $sql = "UPDATE `tbl-hotel-info` SET `hotel_BOOKED_SINGLE` = '${curr}' WHERE `tbl-hotel-info`.`hotel_ID` = ${hotel_id};";
+                $result = $conn->query($sql);
+                $sql = "";
+                $pdcn = 30;
+                $pdcp = 28;
+                break;
+            }
+            case 'm':{
+                $sql = "SELECT * FROM `tbl-hotel-info` WHERE `tbl-hotel-info`.`hotel_ID` = ${hotel_id};";
+                $result = $conn->query($sql);
+                $data = $result->fetch_assoc();
+                $curr = $data['hotel_BOOKED_DOUBLE'];
+                $curr = $curr+1;
+                $sql = "UPDATE `tbl-hotel-info` SET `hotel_BOOKED_DOUBLE` = '${curr}' WHERE `tbl-hotel-info`.`hotel_ID` = ${hotel_id};";
+                $result = $conn->query($sql);
+                $pdcn = 35;
+                $pdcp = 31;
+                break;
+            }
+            case 'l':{
+                $sql = "SELECT * FROM `tbl-hotel-info` WHERE `tbl-hotel-info`.`hotel_ID` = ${hotel_id};";
+                $result = $conn->query($sql);
+                $data = $result->fetch_assoc();
+                $curr = $data['hotel_BOOKED_TRIPLE'];
+                $curr = $curr+1;
+                $sql = "UPDATE `tbl-hotel-info` SET `hotel_BOOKED_TRIPLE` = '${curr}' WHERE `tbl-hotel-info`.`hotel_ID` = ${hotel_id};";
+                $result = $conn->query($sql);
+                $pdcn = 38;
+                $pdcp = 34;
+                break;
+            }
+            case 'xl':{
+                $sql = "SELECT * FROM `tbl-hotel-info` WHERE `tbl-hotel-info`.`hotel_ID` = ${hotel_id};";
+                $result = $conn->query($sql);
+                $data = $result->fetch_assoc();
+                $curr = $data['hotel_BOOKED_FOUR'];
+                $curr = $curr+1;
+                $sql = "UPDATE `tbl-hotel-info` SET `hotel_BOOKED_FOUR` = '${curr}' WHERE `tbl-hotel-info`.`hotel_ID` = ${hotel_id};";
+                $result = $conn->query($sql);
+                $pdcn = 40;
+                $pdcp = 37;
+                break;
+            }
+        }
+        if($status == 'Normal')$cost = $days * $pdcn;
+        else $cost = $days * $pdcp;
         $sql = "INSERT INTO `tbl-reservations` (`res_id`, `hotel_id`, `customer_id`, `room_type`, `start_data`, `end_date`, `total_cost`)
         VALUES (NULL, '${hotel_id}', '${customer_id}', '${roomType}', '${start}', '${end}', '${cost}')";
         $conn->query($sql);
