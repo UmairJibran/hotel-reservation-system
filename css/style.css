@@ -20,6 +20,11 @@
     right: 28px;
 }
 
+.low-padding {
+    width: 200px;
+    padding: 07px 10px;
+}
+
 .left {
     float: left;
 }

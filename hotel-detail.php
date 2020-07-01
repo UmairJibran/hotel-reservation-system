@@ -68,6 +68,24 @@
             <span class="col col-2"><strong>Four Bed Room(s)</strong></span>
             <span class="col col-3"><?php $free = $n4R - $n4BR;echo "<font color='green'><strong>${free}</strong></font> free rooms out of " . $n4R; ?></span>
         </section>
+        <br>
+        <form method="post">
+            <div class="input-group">
+                <label for="id">Enter Your ID <strong>WITHOUT</strong> dashes: </label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="number" class='form-control' name="id_num" id="id">
+                &nbsp;&nbsp;&nbsp;
+                <input name='reserve' type="submit" value="Reserve A Room" class="button low-padding">
+            </div>
+        </form>
+        <?php
+            if(isset($_POST['reserve'])){
+                $userid = $_POST['id_num'];
+                echo $userid;
+                header('location:./reserve.php?hotel='.$hotel_id."&id=".$userid);
+            }
+        ?>
+        <!-- <a href="./reserve.php?hotel=<?php echo $hotel_id?>"><button class="button right">Reserve a Room</button></a> -->
     </div>
 </body>
 </html>
