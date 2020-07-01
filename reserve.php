@@ -89,8 +89,13 @@
                 <input required type="number" class="form-control" value='<?php echo $credit?>' placeholder="Credit Card" name='ccard'>
             </div>
             <br>
-            <small>All the fields are required</small>
-            <input type="submit" name='book' value="Book" class='btn btn-outline-primary right'>
+            <small>All the fields are required</small><br><br>
+            <select name="payment" class="form-control">
+                <option value="" disabled selected>Select a Payment Method</option>
+                <option value="cash">Cash</option>
+                <option value="card">Card</option>
+            </select><br>
+            <input type="submit" name='book' value="Book" class='btn btn-outline-primary left'>
         </form>
     </div>
 </body>
