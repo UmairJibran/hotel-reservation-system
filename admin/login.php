@@ -1,5 +1,6 @@
 <?php
     session_start();
+    if(isset($_SESSION['id'])) header('location:./dashboard.php');
     require_once('../server/connection.php');
 ?>
 
@@ -15,6 +16,7 @@
 <body>
     <div class="jumbotron center">
         <h3>Login</h3>
+        <small class='right'><a href="../">Home</a></small>
     </div>
     <div class="container container-fluid">
         <form method="post">
