@@ -85,7 +85,6 @@
                 header('location:./reserve.php?hotel='.$hotel_id."&id=".$userid);
             }
         ?>
-        <!-- <a href="./reserve.php?hotel=<?php echo $hotel_id?>"><button class="button right">Reserve a Room</button></a> -->
     </div>
 </body>
 </html>
