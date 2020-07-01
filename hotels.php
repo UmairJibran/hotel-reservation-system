@@ -25,16 +25,18 @@
             if($rows >= 1){
                 ?>
                 <table class="table table-hover">
-                    <thead class='center'>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Street/Road</th>
-                        <th>Building</th>
-                        <th>Email</th>
-                        <th>Website</th>
-                        <th>Total Rooms</th>
-                        <th>Details</th>
-                    </thead>
+                    <tr>
+                        <thead class='center'>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Street/Road</th>
+                            <th>Building</th>
+                            <th>Email</th>
+                            <th>Website</th>
+                            <th>Total Rooms</th>
+                            <th>Details</th>
+                        </thead>
+                    </tr>
                     <tbody>
                 <?php
                 $counter = 0;
@@ -52,7 +54,7 @@
                     $n3R = $data['hotel_NTRIPLEROOMS'];
                     $n4R = $data['hotel_NFOURPROOMS'];
                     $rooms = $n1R + $n2R + $n3R + $n4R;
-                    echo "<a href='index.php'>
+                    echo "<tr>
                             <td align='center'>${counter}</td>
                             <td align='center'>${name}</td>
                             <td align='center'>${street}</td>
@@ -61,7 +63,7 @@
                             <td align='center'>${website}</td>
                             <td align='center'>${rooms}</td>
                             <td align='center'><a href='./hotel-detail.php?hotel=${id}'>Visit</a></td>
-                        </a>
+                        </tr>
                     ";
                 }
                 ?>
